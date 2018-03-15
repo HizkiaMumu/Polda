@@ -9,6 +9,10 @@
 @endsection
 @section('content')
 
+<div id="modalTambahJenisKejahatan">
+
+</div>
+
 <div class="col-12">
   <div class="page-title-box">
     <h4 class="page-title float-left">Jenis Kejahatan</h4>
