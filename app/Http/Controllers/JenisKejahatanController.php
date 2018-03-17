@@ -14,9 +14,26 @@ class JenisKejahatanController extends Controller
       return $data;
     }
 
-    public function getSubJenisKejahatan($jenis){
-      $data = JenisKejahatan::where('nama_jenis_kejahatan', $jenis)->first();
-      return $data->subJenis;
+    public function getDetailJenisKejahatan($id){
+      $data = JenisKejahatan::find($id);
+      $data->subJenis;
+      return $data;
+    }
+
+    public function postJenisKejahatan(Request $request){
+      $data = $request->all();
+      if ($request->hasFile('icon_jenis_kejahatan')) {
+        $path = $request->file('icon_jenis_kejahatan')->store('jenis_kejahatan_icons');
+        $data['icon_jenis_kejahatan'] = $path;
+      }
+      $kirim = JenisKejahatan::create($data);
+      return redirect()->back()->with('OK', 'Berhasil menambahkan Jenis Kejahatan!');
+    }
+
+    public function deleteJenisKejahatan($id){
+      $data = JenisKejahatan::findOrFail($id);
+      $data->delete();
+      return redirect()->back()->with('OK', 'Berhasil menghapus data!');
     }
 
 }
